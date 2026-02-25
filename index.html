@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billeterie MétéoPop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="programme.css">
+
+    <style>
+        /* Couleurs dynamiques météo */
+        .cold {
+            background-color: #1e3a8a; /* Bleu */
+        }
+
+        .mild {
+            background-color: #2182a8; /* Cyan */
+        }
+
+        .hot {
+            background-color: #facc15; /* Jaune */
+            color: black;
+        }
+
+        .weather-info {
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 30px;
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-nav" id="navbar">
+        <img src="assets/img/logo-meteopop.png" alt="Logo MétéoPop"
+            onclick="window.location.href='index.html'" style="height:60px; cursor:pointer;">
+
+        <div class="weather-info" id="weather">
+            Chargement météo...
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="./vue/programme.html">Programme</a></li>
+            <li><a href="#info-pratique">Infos pratiques</a></li>
+            <li><a href="./vue/contact.html">Contact</a></li>
+            <li><a href="./vue/billetteries.html" class="cta">Billetterie</a></li>
+        </ul>
+    </header>
+
+    <div class="header-page">
+        <video src="assets/video/festival.mp4" autoplay muted loop class="affiche-video"></video>
+        <h1>Rendez-vous le 10, 11 et 12 Juillet à Lyon</h1>
+        <ul>
+            <li><a href="./vue/programme.html">Programme ⟶</a></li>
+            <li><a href="./vue/billetteries.html">Billetterie ⟶</a></li>
+        </ul>
+    </div>
+
+    <div class="programme">
+        <h2>Découvrez le Programme du Festival 2026</h2>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/billie-eilish.jpg">
+            <span class="artist-name">Billie Eilish</span>
+        </div>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/stromae.jpg">
+            <span class="artist-name">Stromae</span>
+        </div>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/gesaffelstein.jpeg">
+            <span class="artist-name">Gesaffelstein</span>
+        </div>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/damso.jpg">
+            <span class="artist-name">Damso</span>
+        </div>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/louane.jpg">
+            <span class="artist-name">Louane</span>
+        </div>
+
+        <div class="artist">
+            <img class="artist-img" src="assets/img/artists/riles.jpg">
+            <span class="artist-name">Riles</span>
+        </div>
+
+        <a href="./vue/programme.html" class="btn">Toute la programmation</a>
+    </div>
+
+    <div class="info-pratique" id="info-pratique">
+        <h2>Informations Pratiques</h2>
+        <p><strong>Dates et horaires :</strong>
+            10 au 12 juillet 2026 à Lyon (Parc de la Tête d'Or).
+        </p>
+    </div>
+
+    <footer>
+        <a href="./vue/contact.html">Contact</a>
+        <p>&copy; 2026 MétéoPop</p>
+    </footer>
+
+    <!-- SCRIPT METEO OPEN-METEO -->
+    <script>
+        async function getWeather() {
+
+            const latitude = 45.75;  // Lyon
+            const longitude = 4.85;
+
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const temp = data.current_weather.temperature;
+                const wind = data.current_weather.windspeed;
+                const weatherCode = data.current_weather.weathercode;
+
+                let description = "Météo inconnue";
+
+                if (weatherCode === 0) description = "Ciel clair";
+                else if (weatherCode <= 3) description = "Partiellement nuageux";
+                else if (weatherCode <= 48) description = "Brouillard";
+                else if (weatherCode <= 67) description = "Pluie";
+                else if (weatherCode <= 77) description = "Neige";
+                else description = "Conditions variables";
+
+                document.getElementById("weather").innerText =
+                    `Lyon : ${description} | ${temp}°C | Vent ${wind} km/h`;
+
+                const navbar = document.getElementById("navbar");
+
+                navbar.classList.remove("cold", "mild", "hot");
+
+                if (temp < 10) {
+                    navbar.classList.add("cold");
+                } else if (temp >= 10 && temp <= 25) {
+                    navbar.classList.add("mild");
+                } else {
+                    navbar.classList.add("hot");
+                }
+
+            } catch (error) {
+                document.getElementById("weather").innerText =
+                    "Impossible de charger la météo.";
+            }
+        }
+
+        getWeather();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billetterie - MétéoPop</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .tarifs {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px;
+            background-color: #facc15;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Billetterie - Festival MétéoPop</h1>
+        <nav>
+            <a href="../index.html">Accueil</a>
+            <a href="programme.html">Programme</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="tarifs">
+
+        <div class="card">
+            <h2>Pass 1 Jour</h2>
+            <p class="price">30€</p>
+            <p>Accès à une journée au choix</p>
+            <a href="#" class="btn">Acheter</a>
+        </div>
+
+        <div class="card">
+            <h2>Pass 2 Jours</h2>
+            <p class="price">50€</p>
+            <p>Accès à deux jours</p>
+            <a href="#" class="btn">Acheter</a>
+        </div>
+
+        <div class="card">
+            <h2>Pass 3 Jours</h2>
+            <p class="price">70€</p>
+            <p>Accès complet au festival</p>
+            <a href="#" class="btn">Acheter</a>
+        </div>
+
+        <div class="card">
+            <h2>Pass VIP</h2>
+            <p class="price">120€</p>
+            <p>Accès premium + zone VIP</p>
+            <a href="#" class="btn">Acheter</a>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MétéoPop</p>
+    </footer>
+
+</body>
+</html>

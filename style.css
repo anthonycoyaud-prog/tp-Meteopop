@@ -1,0 +1,567 @@
+/* ===================
+   Base / variables
+   =================== */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --purple: #3b0b66;
+  --purple-2: #5a2b86;
+  --orange: #ff7a00;
+  --white: #ffffff;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--white);
+  color: var(--purple);
+}
+
+a{ color: inherit; }
+
+/* ===================
+   Header / Hero
+   =================== */
+.header-page{
+  position: relative;
+  width: 100%;
+  min-height: 72vh;
+  overflow: hidden;
+  padding-top: 70px; /* place pour la barre de navigation */
+}
+
+/* bande violette */
+.header-page::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: var(--purple);
+  z-index: 5;
+}
+
+/* vidéo */
+.affiche-video{
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(72vh - 70px);
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* overlay sombre */
+.header-page::after{
+  content: "";
+  position: absolute;
+  top: 70px; left: 0; right: 0;
+  height: calc(72vh - 70px);
+  background: rgba(0,0,0,0.35);
+  z-index: 2;
+}
+
+/* logo (si tu mets directement <img> dans .header-page) */
+.header-page > img{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  height: 50px;
+  width: auto;
+  z-index: 6;
+}
+
+/* logo (ton header.html : .site-branding) */
+.site-branding img{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  height: 50px;
+  width: auto;
+  z-index: 6;
+}
+
+/* nav */
+.header-page nav{
+  position: absolute;
+  top: 0;
+  right: 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  z-index: 6;
+}
+
+.header-page nav ul{
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.header-page nav a{
+  text-decoration: none;
+  color: var(--white);
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 2px;
+  transition: 0.15s ease;
+}
+
+.header-page nav a:hover{
+  background: rgba(255,255,255,0.12);
+}
+
+/* bouton Billetterie dans le menu */
+.header-page nav a.cta{
+  background: var(--orange);
+  color: var(--white);
+  padding: 10px 16px;
+}
+
+/* option : lien actif (si tu ajoutes class="active") */
+.header-page nav a.active{
+  background: var(--white);
+  color: var(--purple);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* titre hero */
+.header-page h1{
+  position: absolute;
+  top: calc(70px + 22vh);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1000px, 92%);
+  text-align: center;
+  color: var(--white);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 44px);
+  z-index: 3;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+}
+
+/* boutons hero (ton 2e <ul> dans index.html) */
+.header-page > ul{
+  position: absolute;
+  top: calc(70px + 36vh);
+  left: 50%;
+  transform: translateX(-50%);
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  z-index: 3;
+}
+
+.header-page > ul a{
+  display: inline-block;
+  text-decoration: none;
+  background: var(--orange);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 2px;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.header-page > ul a:hover{
+  filter: brightness(0.95);
+}
+
+/* ===================
+   Programme
+   =================== */
+.programme{
+  width: min(980px, 92%);
+  margin: 0 auto;
+  padding: 60px 0 40px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  justify-items: center;
+  align-items: start;
+}
+
+.programme h2{
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 2.3vw, 32px);
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+
+/* carte artiste (overlay du nom sur l'image) */
+.artist{
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+}
+
+.artist-img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 8px 10px #3b0b66;
+  display: block;
+}
+
+/* dégradé en bas pour rendre le texte lisible */
+.artist::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 42%;
+  border-radius: 4px;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+  pointer-events: none;
+}
+
+.artist-name{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  z-index: 2;
+
+  text-align: center;
+  color: var(--white);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+/* bouton (utilisé dans .programme et ailleurs) */
+.btn{
+  grid-column: 1 / -1;
+  justify-self: center;
+
+  display: inline-block;
+  text-decoration: none;
+  background: var(--orange);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 2px;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.btn:hover{ filter: brightness(0.95); }
+
+/* ===================
+   Infos pratiques
+   =================== */
+.info-pratique{
+  width: min(980px, 92%);
+  margin: 0 auto;
+  padding: 40px 0 60px;
+  text-align: center;
+}
+
+.info-pratique h2{
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  margin-bottom: 22px;
+  color: var(--purple);
+}
+
+.info-pratique p{
+  width: min(820px, 100%);
+  margin: 18px auto;
+  text-align: left;
+  border: 2px solid var(--purple-2);
+  border-radius: 14px;
+  padding: 18px 22px;
+  background: var(--white);
+  color: var(--purple);
+  line-height: 1.45;
+  font-size: 14px;
+}
+
+.info-pratique p strong{
+  display: block;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* ===================
+   Footer
+   =================== */
+footer{
+  background: var(--purple);
+  padding: 18px 12px;
+  text-align: center;
+}
+
+footer a{
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+footer p{
+  color: var(--white);
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+/* ===================
+   Responsive
+   =================== */
+@media (max-width: 900px){
+  .header-page nav ul{ gap: 10px; }
+  .header-page nav a{ padding: 10px 10px; }
+}
+
+@media (max-width: 820px){
+  .programme{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .header-page nav ul{
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 520px){
+  .programme{
+    grid-template-columns: 1fr;
+  }
+
+  .header-page > ul{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .site-branding img{
+    height: 44px;
+  }
+}
+/* ===================
+   NAV RESPONSIVE
+   =================== */
+
+/* On cache le checkbox */
+.nav-toggle{
+  display: none;
+}
+
+/* Burger caché sur desktop */
+.burger{
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 700px){
+
+  /* place le burger à droite dans la barre violette */
+  .burger{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    z-index: 7;
+
+    cursor: pointer;
+  }
+
+  .burger span{
+    width: 26px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* on prépare le menu déroulant */
+  .header-page nav{
+    right: 0;
+    width: 100%;
+  }
+
+  /* on cache la liste par défaut */
+  .header-page nav ul{
+    display: none;
+    position: absolute;
+    top: 70px;     /* juste sous la barre violette */
+    right: 0;
+    width: 100%;
+    background: var(--purple);
+    padding: 10px 0;
+    z-index: 6;
+
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+
+  .header-page nav li{
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-page nav a{
+    display: block;
+    padding: 12px 16px;
+    width: 100%;
+  }
+
+  /* Quand on coche => on affiche le menu */
+  .nav-toggle:checked + .burger + .nav-links{
+    display: flex;
+  }
+
+  /* option : bouton cta prend la largeur */
+  .header-page nav a.cta{
+    margin: 6px 16px;
+    width: calc(100% - 32px);
+    text-align: center;
+  }
+}
+/* ===================
+   PAGE PROGRAMMATION
+   =================== */
+
+section h2{
+  font-family: Georgia, "Times New Roman", serif;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  color: var(--purple);
+  text-align: center;
+}
+
+section ul{
+  list-style: none;
+  width: min(800px, 92%);
+  margin: 0 auto 30px;
+  padding: 0;
+}
+
+section ul li{
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  background: var(--white);
+  border: 2px solid var(--purple-2);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* ===================
+   PAGE CONTACT
+   =================== */
+
+form{
+  width: min(600px, 92%);
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+form label{
+  font-weight: bold;
+  color: var(--purple);
+}
+
+form input,
+form textarea{
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--purple-2);
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+form input:focus,
+form textarea:focus{
+  border-color: var(--orange);
+}
+
+form button{
+  padding: 12px;
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+form button:hover{
+  filter: brightness(0.95);
+}
+
+/* ===================
+   PAGE BILLETTERIE
+   =================== */
+
+.tarifs{
+  width: min(1000px, 92%);
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.card{
+  border: 2px solid var(--purple-2);
+  border-radius: 14px;
+  padding: 25px 20px;
+  text-align: center;
+  background: var(--white);
+  transition: 0.2s ease;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.card h2{
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--purple);
+}
+
+.price{
+  font-size: 26px;
+  font-weight: bold;
+  margin: 12px 0;
+  color: var(--orange);
+}
+
+/* ===================
+   RESPONSIVE PAGES
+   =================== */
+
+@media (max-width: 900px){
+  .tarifs{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px){
+  .tarifs{
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - MétéoPop</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        form {
+            max-width: 500px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #6b21a8;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4c1d95;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Contactez les organisateurs</h1>
+        <nav>
+            <a href="../index.html">Accueil</a>
+            <a href="programme.html">Programme</a>
+            <a href="billetteries.html">Billetterie</a>
+        </nav>
+    </header>
+
+    <form>
+        <label>Nom :</label>
+        <input type="text" placeholder="Votre nom">
+
+        <label>Email :</label>
+        <input type="email" placeholder="Votre email">
+
+        <label>Message :</label>
+        <textarea rows="5" placeholder="Votre message"></textarea>
+
+        <button type="button">Envoyer</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2026 MétéoPop</p>
+    </footer>
+
+</body>
+</html>
